@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Box, Button, Paper, Typography } from "@mui/material";
+import { Box, Button, Paper, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import HistBarPlot from './plots/HistBarPlot';
 import HistTimePlot from './plots/HistTimePlot';
 import { getRiskAverage } from './utils/getHighestCount';
@@ -24,7 +24,7 @@ export default function History(props) {
         return Object.keys(label_assignment)[parseInt(averagedState * 5)] + " " + averagedState.toFixed(2) * 100 + "%"
     }
 
-    let otherTitleButton = currentWin === "features" ? "Vorhersagen" : "Signale"
+    let otherTitleButton = currentWin === "features" ? "Signale" : "Vorhersagen"
 
     return(
         <Box sx={{width: "100%", display: "flex", flexDirection: "column", alignItems: "center", maxWidth: 1600 }}>  
@@ -32,7 +32,16 @@ export default function History(props) {
             <Typography>
                 Einschätzungen des Modells in den letzten {props.histLookback} Tagen.
             </Typography>
-            <Button variant="contained" onClick={handleWindow}>{otherTitleButton}</Button>
+            <ToggleButtonGroup
+                color="primary"
+                value={otherTitleButton}
+                exclusive
+                onChange={handleWindow}
+                >
+                <ToggleButton value="Signale">Signale</ToggleButton>
+                <ToggleButton value="Vorhersagen">Vorhersagen</ToggleButton>
+            </ToggleButtonGroup>
+            {/* <Button variant="contained" onClick={handleWindow}>{otherTitleButton}</Button> */}
             <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", m:2}}>

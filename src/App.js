@@ -7,18 +7,20 @@ import { fetchAle } from './fetching/behaviour';
 import { fetchForceplot, fetchForceplotMulti } from './fetching/feature_importance';
 import { fetchCurrentDp, fetchFeaturelist } from './fetching/general';
 import { fetchHistory, fetchHistoryAverage } from './fetching/history';
+import { fetchScores } from './fetching/scoring';
 import History from './History';
 import GeneralLinePlot from './plots/GeneralLinePlot';
+import Trustscores from './Trustscores';
 
 function App() {
 
-  const [pred, setPred] = useState({
-      value: 42,
-      confidence: "76%"
-  });
-
   const [features, setFeatures] = useState([])
   const [currentDp, setCurrentDp] = useState([])
+  const [trustscores, setTrustscores] = useState({
+      "predicted_classes": [],
+      "closest_classes": [],
+      "scores": []
+  })
   const [activeTab, setActiveTab] = useState(1)
   const [forceplots, setForceplots] = useState(null)
   const [forceplotMulti, setForceplotMulti] = useState(null)
@@ -33,6 +35,15 @@ function App() {
   const [historyAverage, setHistoryAverage] = useState(1)
   const [histLookback, setHistLookback] = useState(1)
   const standardLookback = 4
+
+  useEffect(() => {
+    fetchScores(histLookback).then(response => {
+      setTrustscores(response);
+    })
+    .catch(error => {
+        console.log(error)
+    });
+  }, [histLookback])
 
   useEffect(() => {
     fetchFeaturelist().then(response => {
@@ -114,6 +125,8 @@ function App() {
       />
     } else if (activeTab === 3) {
       return <Behaviour features={features}/>
+    } else if (activeTab === 4) {
+      return <Trustscores trustscores={trustscores} timestamps={history.timestamps}/>
     } else return null;
   }
 
@@ -136,7 +149,7 @@ function App() {
             <Tab label="Historie" value={1} />
             <Tab label="Feature-Relevanz" value={2} />
             <Tab label="Model-Verhalten" value={3}  />
-            <Tab label="Beispiele" value={4}  />
+            <Tab label="Scoring" value={4}  />
           </Tabs>
         </Paper>
         {chooser()}
