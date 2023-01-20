@@ -1,15 +1,17 @@
 import {Box, Paper, Typography, Tab, Tabs } from '@mui/material';
 import React, { useState, useEffect } from 'react';
+import Anchors from './Anchors';
 import './App.css';
 import Behaviour from './Behaviour';
 import FeatureImportance from './FeatureImportance';
+import { fetchAnchors } from './fetching/anchors';
 import { fetchAle } from './fetching/behaviour';
+import { fetchCounterfactuals } from './fetching/counterfactuals';
 import { fetchForceplot, fetchForceplotMulti } from './fetching/feature_importance';
 import { fetchCurrentDp, fetchFeaturelist } from './fetching/general';
 import { fetchHistory, fetchHistoryAverage } from './fetching/history';
 import { fetchScores } from './fetching/scoring';
 import History from './History';
-import GeneralLinePlot from './plots/GeneralLinePlot';
 import Trustscores from './Trustscores';
 
 function App() {
@@ -20,6 +22,18 @@ function App() {
       "predicted_classes": [],
       "closest_classes": [],
       "scores": []
+  })
+  const [anchors, setAnchors] = useState({
+    "anchors": [],
+    "precisions": [],
+    "coverages": [],
+    "dps": [],
+    "preds": []
+  })
+  const [counterfactuals, setCounterfactuals] = useState({
+    "dps": [],
+    "classes": [],
+    "orig_classes": []
   })
   const [activeTab, setActiveTab] = useState(1)
   const [forceplots, setForceplots] = useState(null)
@@ -44,6 +58,25 @@ function App() {
         console.log(error)
     });
   }, [histLookback])
+
+  useEffect(() => {
+    fetchAnchors().then(response => {
+      setAnchors(response);
+    })
+    .catch(error => {
+        console.log(error)
+    });
+  }, [])
+
+  useEffect(() => {
+    fetchCounterfactuals().then(response => {
+      setCounterfactuals(response);
+    })
+    .catch(error => {
+        console.log(error)
+    });
+  }, [])
+
 
   useEffect(() => {
     fetchFeaturelist().then(response => {
@@ -127,6 +160,8 @@ function App() {
       return <Behaviour features={features}/>
     } else if (activeTab === 4) {
       return <Trustscores trustscores={trustscores} timestamps={history.timestamps}/>
+    } else if (activeTab === 5) {
+      return <Anchors currentDp={currentDp} anchors={anchors}/>
     } else return null;
   }
 
@@ -137,19 +172,14 @@ function App() {
   return (
     <Box className="App">
       <Paper sx={{m: 2, p: 2, display: "flex", flexDirection: "column", alignItems: "center"}}>
-      
-        <Typography>Die geschätzte Zeit bist zum Ausfall ist: <b>{generalInfo.prediction.toFixed(2)}</b> Tage (max: 60 Tage)</Typography>
-        <Box>
-            <Typography>Der aktuelle R² Wert liegt bei: <b>{generalInfo.r_squared.toFixed(2)}</b></Typography>
-            <Typography sx={{color: "red"}}>Ein R-Wert im negativen Bereich bedeutet, dass das Model <b>keine guten</b> Vorhersagen trifft.</Typography>
-
-        </Box>
+        <Typography variant="h2">XAI Prototype</Typography>
         <Paper sx={{m: 2}}>
           <Tabs value={activeTab} onChange={handleTabChange} aria-label="basic tabs example">
             <Tab label="Historie" value={1} />
             <Tab label="Feature-Relevanz" value={2} />
             <Tab label="Model-Verhalten" value={3}  />
             <Tab label="Scoring" value={4}  />
+            <Tab label="Anchors" value={5}  />
           </Tabs>
         </Paper>
         {chooser()}

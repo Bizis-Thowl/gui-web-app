@@ -4,7 +4,7 @@ import { label_assignment } from '../constants';
 
 export default function ScoringScatterPlot(props) {
 
-    const lookback = 10
+    const lookback = 145
 
     const { timestamps, preds, closest, scores } = props
     const [cut_timestamps, cut_preds, cut_closest, cut_scores] = [
@@ -76,8 +76,6 @@ export default function ScoringScatterPlot(props) {
 
         layout={ {width: 640, height: 480, title: 'Vertrauens-Score',     
         "yaxis": {
-            // "categoryorder": "array",
-            // "categoryarray":  ["low", "low-med", "medium", "med-high", "high"]
             ticktext: Object.keys(label_assignment),
             tickvals: Object.values(label_assignment),
         },
