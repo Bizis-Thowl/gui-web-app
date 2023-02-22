@@ -29,3 +29,19 @@ export const fetchCurrentDp = (length) => {
     return fetch(base_path + "/api/general/currentdp/" + length, requestOptions)
     .then(response => response.json())
 }
+
+export const fetchPred = (dp) => {
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(dp),
+        redirect: 'follow'
+    };
+
+    return fetch(base_path + "/api/general/predict", requestOptions)
+    .then(response => response.json())
+}

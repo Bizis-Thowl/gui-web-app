@@ -1,77 +1,75 @@
-import { Box, Button, IconButton, Paper, TextField, Tooltip, Typography } from '@mui/material';
+import { Box, Button, IconButton, Paper, Slider, TextField, Tooltip, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import EjectIcon from '@mui/icons-material/Eject';
-// import HorizontalDrag from '../utils/HorizontalDrag';
 
 const width = 200
 
-export default function AnchorsPlot(props) {
+// export default function AnchorsPlot(props) {
 
-    const {value1, cond1, feature, 
-        cond2, value2, getValueRange, 
-        anchor, currentValue} = props;
+//     const {value1, cond1, feature, 
+//         cond2, value2, getValueRange, 
+//         anchor, currentValue} = props;
     
-    const [dpValue, setDpValue] = useState(currentValue);
-    const [fieldValue, setFieldValue] = useState("");
+//     const [localDp, setLocalDp] = useState(currentValue);
 
-    const handleDpValue = () => {
-        setDpValue(parseFloat(fieldValue))
-    }
+//     const handleDpValue = () => {
+//         props.updateCurrentDp(feature, localDp)
+//     }
 
-    const handleFieldValue = (e) => {
-        setFieldValue(e.target.value)
-    }
+//     const handleLocalDp = (e) => {
+//         setLocalDp(e.target.value)
+//     } 
 
-    const value_range = getValueRange(feature)
+//     const value_range = getValueRange(feature)
 
-    const min = value_range[0]
-    const max = value_range[1]
+//     const min = value_range[0]
+//     const max = value_range[1]
     
-    let valueProportion = ((parseFloat(dpValue) - min) / (max - min)) * 100
+//     let valueProportion = ((parseFloat(currentValue) - min) / (max - min)) * 100
 
-    let plot;
-    const no_range = min === max
+//     let plot;
+//     const no_range = min === max
 
-    if (no_range) {
-        plot = <OneBarsPlot anchor={anchor} min={min}/>
-    } else if (value1) {
-        plot = <ThreeBarsPlot anchor={anchor} value1={value1} value2={value2} 
-                min={min} max={max}
-        />
-    } else {
-        plot = <TwoBarsPlot anchor={anchor} value={value2} cond={cond2} min={min} max={max}/>
-    }
+//     if (no_range) {
+//         plot = <OneBarsPlot anchor={anchor} min={min}/>
+//     } else if (value1) {
+//         plot = <ThreeBarsPlot anchor={anchor} value1={value1} value2={value2} 
+//                 min={min} max={max}
+//         />
+//     } else {
+//         plot = <TwoBarsPlot anchor={anchor} value={value2} cond={cond2} min={min} max={max}/>
+//     }
 
-    return(
-        <Box sx={{mb: 1}}>
-            <Typography align="left">{feature}:</Typography>
-            <Box sx={{height: "70px"}}>
-                {
-                    no_range ?
-                    <Box sx= {{display: "flex", justifyContent: "center"}}>
-                        <Typography>{min}</Typography>
-                    </Box>
-                    :
-                    <Box sx={{display: "flex", justifyContent: "space-between"}}>
-                        <Typography>{min}</Typography>
-                        <Typography>{max}</Typography>
-                    </Box>
-                }
-                {plot}
-                {/* <HorizontalDrag elem= */}
-                <Box sx={{position: "relative"}}>
-                    <IconButton size="small" sx={{position: "absolute", left: valueProportion + "%", top: -7, transform: "translate(-55%, 0%)"}}>
-                        <EjectIcon sx={{fontSize: 20}} />
-                    </IconButton>
-                    <Typography sx={{position: "absolute", left: valueProportion + "%", top: 15, transform: "translate(-55%, -5%)"}}>{dpValue}</Typography>
-                </Box>
-                {/* /> */}
-            </Box>
-        </Box>
-    )
-}
+//     return(
+//         <Box sx={{m: 2}}>
+//             <Typography align="left">{feature}:</Typography>
+//             <Box sx={{height: "120px"}}>
+//                 {
+//                     no_range ?
+//                     <Box sx= {{display: "flex", justifyContent: "center"}}>
+//                         <Typography>{min}</Typography>
+//                     </Box>
+//                     :
+//                     <Box sx={{display: "flex", justifyContent: "space-between"}}>
+//                         <Typography>{min}</Typography>
+//                         <Typography>{max}</Typography>
+//                     </Box>
+//                 }
+//                 <Slider min={min} max={max} valueLabelDisplay="auto" value={parseFloat(localDp)}
+//                     onChangeCommitted={handleDpValue} onChange={handleLocalDp}
+//                     step={0.1}
+//                 />
+//                 {plot}
+//                 <Box sx={{position: "relative"}}>
+//                     <EjectIcon  sx={{position: "absolute", left: valueProportion + "%", top: -2, transform: "translate(-50%, 0%)", fontSize: 20}} />
+//                     <Typography sx={{position: "absolute", left: valueProportion + "%", top: 15, transform: "translate(-55%, -5%)"}}>{currentValue}</Typography>
+//                 </Box>
+//             </Box>
+//         </Box>
+//     )
+// }
 
-function OneBarsPlot(props) {
+export function OneBarsPlot(props) {
 
     return(
         <Box sx={{display: "flex", flexDirection: "row"}}>
@@ -82,7 +80,7 @@ function OneBarsPlot(props) {
     )
 }
 
-function TwoBarsPlot(props) {
+export function TwoBarsPlot(props) {
 
     const {value, cond, min, max} = props;
 
@@ -134,7 +132,7 @@ function TwoBarsPlot(props) {
     return out
 }
 
-function ThreeBarsPlot(props) {
+export function ThreeBarsPlot(props) {
 
     const {value1, value2, min, max} = props;
 

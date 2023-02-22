@@ -1,11 +1,10 @@
 import {Box, Paper, Typography, Tab, Tabs } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-import Anchors from './Anchors';
 import './App.css';
 import Behaviour from './Behaviour';
+import ExaminationChoice from './components/LocalExamination/ExaminationChoice';
 import FeatureImportance from './FeatureImportance';
 import { fetchAnchors } from './fetching/anchors';
-import { fetchAle } from './fetching/behaviour';
 import { fetchCounterfactuals } from './fetching/counterfactuals';
 import { fetchForceplot, fetchForceplotMulti } from './fetching/feature_importance';
 import { fetchCurrentDp, fetchFeaturelist } from './fetching/general';
@@ -161,7 +160,7 @@ function App() {
     } else if (activeTab === 4) {
       return <Trustscores trustscores={trustscores} timestamps={history.timestamps}/>
     } else if (activeTab === 5) {
-      return <Anchors currentDp={currentDp} anchors={anchors}/>
+      return <ExaminationChoice currentDp={currentDp} anchors={anchors}/>
     } else return null;
   }
 
