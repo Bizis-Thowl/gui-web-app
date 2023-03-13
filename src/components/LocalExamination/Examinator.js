@@ -5,10 +5,13 @@ import LocalExamination from './LocalExamination';
 
 export default function Examinator(props) {
 
-    const [showSlider, setShowSlider] = useState(false);
-    const [showAnchor, setShowAnchor] = useState(false);
-    const [showFi, setShowFi] = useState(false);
-    const [showMore, setShowMore] = useState(false);
+    const default_config = false
+    const deactivate_manager = false
+
+    const [showSlider, setShowSlider] = useState(default_config);
+    const [showAnchor, setShowAnchor] = useState(default_config);
+    const [showFi, setShowFi] = useState(default_config);
+    const [showMore, setShowMore] = useState(default_config);
 
     const toggleSlider = () => {
         setShowSlider(!showSlider)
@@ -29,11 +32,14 @@ export default function Examinator(props) {
                  allDps={props.allDps} anchors={props.anchors} activeAnchor={props.activeAnchor} timestamp={props.timestamp}
                  showSlider={showSlider} showAnchor={showAnchor} showFi={showFi} showMore={showMore}
             />
-            <ExaminationManagement
-                backToOverview={props.backToOverview} 
-                toggleSlider={toggleSlider} toggleAnchor={toggleAnchor} toggleFi={toggleFi} toggleMore={toggleMore}
-                showSlider={showSlider} showAnchor={showAnchor} showFi={showFi} showMore={showMore}
-            />
+            {
+                !deactivate_manager &&
+                <ExaminationManagement
+                    backToOverview={props.backToOverview} 
+                    toggleSlider={toggleSlider} toggleAnchor={toggleAnchor} toggleFi={toggleFi} toggleMore={toggleMore}
+                    showSlider={showSlider} showAnchor={showAnchor} showFi={showFi} showMore={showMore}
+                />
+            }
         </Box>
     )
 }
