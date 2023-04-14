@@ -178,7 +178,7 @@ function App() {
             <Tab label="Feature-Relevanz" value={2} />
             <Tab label="Model-Verhalten" value={3}  />
             <Tab label="Scoring" value={4}  />
-            <Tab label="Anchors" value={5}  />
+            <Tab label="Was-Wenn?" value={5}  />
           </Tabs>
         </Paper>
         {chooser()}
