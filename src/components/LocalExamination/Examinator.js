@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import ExaminationManagement from './ExaminationManagement';
 import LocalExamination from './LocalExamination';
@@ -27,19 +27,23 @@ export default function Examinator(props) {
     }
     
     return(
-        <Box sx={{display: "flex"}}>
-            <LocalExamination
-                 allDps={props.allDps} anchors={props.anchors} activeAnchor={props.activeAnchor} timestamp={props.timestamp}
-                 showSlider={showSlider} showAnchor={showAnchor} showFi={showFi} showMore={showMore}
-            />
-            {
-                !deactivate_manager &&
-                <ExaminationManagement
-                    backToOverview={props.backToOverview} 
-                    toggleSlider={toggleSlider} toggleAnchor={toggleAnchor} toggleFi={toggleFi} toggleMore={toggleMore}
+        <Box>
+            <Typography variant="h2">Examination View</Typography>
+            <Box sx={{display: "flex"}}>
+                <LocalExamination
+                    allDps={props.allDps} anchors={props.anchors} activeAnchor={props.activeAnchor} timestamp={props.timestamp}
                     showSlider={showSlider} showAnchor={showAnchor} showFi={showFi} showMore={showMore}
                 />
-            }
+                {
+                    !deactivate_manager &&
+                    <ExaminationManagement
+                        backToOverview={props.backToOverview} 
+                        toggleSlider={toggleSlider} toggleAnchor={toggleAnchor} toggleFi={toggleFi} toggleMore={toggleMore}
+                        showSlider={showSlider} showAnchor={showAnchor} showFi={showFi} showMore={showMore}
+                    />
+                }
+            </Box>
+
         </Box>
     )
 }

@@ -1,6 +1,5 @@
-import { Box, Button, IconButton, Paper, Slider, TextField, Tooltip, Typography } from '@mui/material';
+import { Box, Paper, Tooltip } from '@mui/material';
 import React, { useState } from 'react';
-import EjectIcon from '@mui/icons-material/Eject';
 
 const width = 200
 
@@ -74,7 +73,7 @@ export function OneBarsPlot(props) {
     return(
         <Box sx={{display: "flex", flexDirection: "row"}}>
             <Tooltip title={props.anchor}>
-                <Paper sx={{width: width, backgroundColor: "blue", height: "10px"}}/>
+                <Paper sx={{width: width, backgroundColor: "lightblue", height: "10px"}}/>
             </Tooltip>
         </Box>
     )
@@ -108,8 +107,8 @@ export function TwoBarsPlot(props) {
     const width_2 =  parseInt(width_2_ratio * width) + "px"
 
     if (left_condition && proportion > 0) {
-        left_color = "blue"
-        right_color = "red"
+        left_color = "lightblue"
+        right_color = "orange"
         out = 
         <Box sx={{display: "flex", flexDirection: "row"}}>
             <Tooltip title={props.anchor}>
@@ -118,8 +117,8 @@ export function TwoBarsPlot(props) {
             <Paper sx={{width: width_2, backgroundColor: right_color, height: "10px"}}/>
         </Box>
     } else {
-        left_color = "red"
-        right_color = "blue"
+        left_color = "orange"
+        right_color = "lightblue"
         out = 
         <Box sx={{display: "flex", flexDirection: "row"}}>
             <Paper sx={{width: width_1, backgroundColor: left_color, height: "10px"}}/>
@@ -145,8 +144,8 @@ export function ThreeBarsPlot(props) {
         proportion2 = 1.0
     }
 
-    const left_color = "blue"
-    const right_color = "red"
+    const left_color = "lightblue"
+    const right_color = "orange"
     const width_1_ratio = proportion1
     const width_2_ratio = 1-(proportion2+proportion1)
     const width_3_ratio = proportion2

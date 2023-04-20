@@ -1,6 +1,7 @@
-import { Box, Button, ToggleButtonGroup } from '@mui/material';
+import { Box, Button, ToggleButtonGroup, Typography } from '@mui/material';
 import React from 'react';
 import MyToggleButton from './MyToggleButton';
+import HelpPopover from './HelpPopover';
 
 export default function ExaminationManagement(props) {
 
@@ -13,6 +14,10 @@ export default function ExaminationManagement(props) {
     return(
         <Box sx={{display: "flex", flexDirection: "column", m: 2}}>
             <Button variant="contained" onClick={backToOverview}>Back</Button>
+            <Box sx={{display: "flex", alignItems: "center", mt: 2}}>
+                <Typography>Augmentations:</Typography>
+                <HelpPopover info={["Click on a button below to augment the examination view"]} notAbsolute/>
+            </Box>
             <ToggleButtonGroup orientation='vertical' sx={{mt: 2}}>
                 <MyToggleButton onClick={toggleSlider} selected={showSlider} text="Slider" />
                 <MyToggleButton onClick={toggleAnchor} selected={showAnchor} text="Anchor" />

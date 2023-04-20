@@ -46,7 +46,7 @@ function App() {
       "r_squared": 1
   })
   const [historyAverage, setHistoryAverage] = useState(1)
-  const [histLookback, setHistLookback] = useState(1)
+  const [histLookback, setHistLookback] = useState(60)
   const standardLookback = 4
 
   useEffect(() => {
