@@ -1,10 +1,10 @@
-import { Visibility, Close } from '@mui/icons-material';
+import { Visibility, Close, VisibilityOff, LockRounded } from '@mui/icons-material';
 import { ToggleButton } from '@mui/material';
 import React from 'react';
 
 export default function MyToggleButton(props) {
 
-    const {onClick, selected, text} = props
+    const {onClick, selected, locked, text} = props
 
     return(
         <ToggleButton sx={{display: "flex", justifyContent: "space-between"}} onClick={onClick} selected={selected}>
@@ -12,7 +12,11 @@ export default function MyToggleButton(props) {
             {
                 selected ?
                 <Visibility/> :
-                <Close/>
+                <VisibilityOff/>
+            }
+            {
+                locked &&
+                <LockRounded/>
             }
         </ToggleButton>
     )
