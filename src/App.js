@@ -171,14 +171,14 @@ function App() {
   return (
     <Box className="App">
       <Paper sx={{m: 2, p: 2, display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <Typography variant="h2">XAI Prototype</Typography>
+        <Typography variant="h1">XAI Prototype</Typography>
         <Paper sx={{m: 2}}>
           <Tabs value={activeTab} onChange={handleTabChange} aria-label="basic tabs example">
-            <Tab label="Historie" value={1} />
-            <Tab label="Feature-Relevanz" value={2} />
-            <Tab label="Model-Verhalten" value={3}  />
+            <Tab label="History" value={1} />
+            <Tab label="Feature Relevance" value={2} />
+            <Tab label="Model behaviour" value={3}  />
             <Tab label="Scoring" value={4}  />
-            <Tab label="Was-Wenn?" value={5}  />
+            <Tab label="What-if?" value={5}  />
           </Tabs>
         </Paper>
         {chooser()}

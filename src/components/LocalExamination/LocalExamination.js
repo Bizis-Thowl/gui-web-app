@@ -187,7 +187,6 @@ export default function LocalExamination(props) {
           />
         );
       }
-      console.log(Math.abs(variableShapShare * 100));
       anchor_plots[featureIndex] = (
         <Box sx={{ display: "flex", alignItems: "center" }}>
           {singleFeaturePlot}
@@ -207,7 +206,7 @@ export default function LocalExamination(props) {
                     borderRadius: "0px 10px 10px 0px",
                     height: 20,
                     width: "100%",
-                    backgroundColor: "lightgrey",
+                    backgroundColor: "white",
                   }}
                 >
                   <Typography>{variableShapValue.toFixed(2)}</Typography>
@@ -229,7 +228,7 @@ export default function LocalExamination(props) {
                     borderRadius: "0px 10px 10px 0px",
                     height: 20,
                     width: "100%",
-                    backgroundColor: "lightgrey",
+                    backgroundColor: "white",
                   }}
                 >
                   <Typography>{shapValue.toFixed(2)}</Typography>
@@ -319,8 +318,8 @@ export default function LocalExamination(props) {
                   info={[
                     "The anchor provides an orientation in which limits the predictions are very likely to remain the same as the datapoint under observation.",
                     "The coverage provides information on how many datapoints from the training data are part of these limits.",
-                    "The precision provides information" +
-                      "about the percentage of these datapoints is classified with the same prediction as the datapoint under observation.",
+                    "The precision provides information " +
+                      "about the percentage of these datapoints that are classified with the same prediction as the datapoint under observation.",
                   ]}
                 />
                 <Typography>
@@ -377,11 +376,17 @@ export default function LocalExamination(props) {
                     <Box>
                       <Typography>Shap for observed data point:</Typography>
                       <ShapPieChart shapValues={shapValues} />
-                      <Typography>Shap for changed data point:</Typography>
-                      <ShapPieChart
-                        shapValues={variableShapValues}
-                        featureOrder={shapValues.map((v) => v.feature)}
-                      />
+                      {
+                        showSlider &&
+                        <Box>
+                        <Typography>Shap for changed data point:</Typography>
+                        <ShapPieChart
+                          shapValues={variableShapValues}
+                          featureOrder={shapValues.map((v) => v.feature)}
+                        />
+
+                        </Box>
+                      }
                     </Box>
                   )}
                 </Box>
