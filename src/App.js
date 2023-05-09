@@ -164,7 +164,7 @@ function App() {
     } else return null;
   }
 
-  if (!(history && generalInfo.prediction && forceplots && historyAverage)) {
+  if (!(history && generalInfo.prediction && historyAverage)) {
       return <Typography>Lädt....</Typography>
   }
 
@@ -175,10 +175,10 @@ function App() {
         <Paper sx={{m: 2}}>
           <Tabs value={activeTab} onChange={handleTabChange} aria-label="basic tabs example">
             <Tab label="History" value={1} />
-            <Tab label="Feature Relevance" value={2} />
-            <Tab label="Model behaviour" value={3}  />
-            <Tab label="Scoring" value={4}  />
-            <Tab label="What-if?" value={5}  />
+            <Tab label="Feature Relevance" value={2} disabled />
+            <Tab label="Model behaviour" value={3} disabled  />
+            <Tab label="Scoring" value={4} disabled />
+            <Tab label="What-if?" value={5}/>
           </Tabs>
         </Paper>
         {chooser()}

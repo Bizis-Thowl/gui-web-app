@@ -31,7 +31,7 @@ export default function HistBarPlot(props) {
 
         ]}
 
-        layout={ {width: 640, height: 480, title: 'Häufigkeitsverteilung',    
+        layout={ {width: 640, height: 480, title: 'Frequency Distribution',    
         "xaxis": {
             "categoryorder": "array",
             "categoryarray":  ["low", "low-med", "medium", "med-high", "high"]

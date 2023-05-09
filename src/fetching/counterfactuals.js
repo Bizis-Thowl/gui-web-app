@@ -1,4 +1,6 @@
-const base_path = "http://localhost:5001"
+import { alibiAddress } from "../config";
+
+const base_path = alibiAddress
 
 export const fetchCounterfactuals = () => {
 

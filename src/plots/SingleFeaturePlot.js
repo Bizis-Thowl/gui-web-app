@@ -2,6 +2,7 @@ import { Box, Paper, Slider, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EjectIcon from "@mui/icons-material/Eject";
 import { OneBarsPlot, ThreeBarsPlot, TwoBarsPlot } from "./AnchorsPlot";
+import HelpPopover from "../components/LocalExamination/HelpPopover";
 
 const width = 200;
 
@@ -32,9 +33,9 @@ export default function SingleFeaturePlot(props) {
   let anchor = "   ";
 
   if (value2 === undefined) {
-    anchor = min + " <= " + feature + " <= " + max
+    anchor = min + " <= " + feature + " <= " + max;
   } else if (value1 === undefined) {
-    anchor = feature + " " + cond2 + " " + value2
+    anchor = feature + " " + cond2 + " " + value2;
   } else {
     anchor = value1 + " " + cond1 + " " + feature + " " + cond2 + " " + value2;
   }
@@ -66,9 +67,7 @@ export default function SingleFeaturePlot(props) {
 
   const chooseAnchorPlot = () => {
     if (value2 === undefined) {
-      return (
-        <OneBarsPlot anchor={anchor} min={min} />
-      );
+      return <OneBarsPlot anchor={anchor} min={min} />;
     } else if (noRange) {
       return <OneBarsPlot anchor={anchor} min={min} />;
     } else if (value1) {
@@ -95,7 +94,14 @@ export default function SingleFeaturePlot(props) {
   };
 
   return (
-    <Paper sx={{ p: 2, m: 2 }}>
+    <Paper sx={{ p: 2, m: 2, position: "relative" }}>
+      <HelpPopover
+        info={[
+          "Here you can see the individual feature with min and max value to the left and right of the bar and the actual feature value indicated by a black arrow.",
+          showSlider && "Slider: Changing the feature with the slider will update the model prediction. The changed feature value is indicated by a red arrow",
+          showAnchor && "Anchor: The anchor is indicated as the light blue area of the bar. If ALL feature values are inside the light blue area it is very likely to be part of the anchored class."
+        ]}
+      />
       <Typography>{feature}</Typography>
       <Box
         sx={{

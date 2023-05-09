@@ -1,5 +1,5 @@
 import { HelpOutline } from "@mui/icons-material";
-import { Box, IconButton, Popover, Paper, Typography } from "@mui/material";
+import { Box, IconButton, Popover, Typography } from "@mui/material";
 import { useState } from "react";
 
 export default function HelpPopover(props) {

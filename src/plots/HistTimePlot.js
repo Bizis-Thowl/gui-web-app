@@ -49,7 +49,7 @@ export default function HistTimePlot(props) {
 
         ]}
 
-        layout={ {width: 640, height: 480, title: 'Detail-Sicht',     
+        layout={ {width: 640, height: 480, title: 'Detail View',     
         "yaxis": {
             // "categoryorder": "array",
             // "categoryarray":  ["low", "low-med", "medium", "med-high", "high"]

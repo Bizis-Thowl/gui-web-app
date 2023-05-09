@@ -1,4 +1,6 @@
-const base_path = "http://localhost:5000"
+import { backendAddress } from "../config";
+
+const base_path = backendAddress
 
 export const fetchAle = (currClass, feature) => {
 
