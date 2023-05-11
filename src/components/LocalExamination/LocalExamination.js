@@ -1,5 +1,5 @@
 import { Typography, Box, Paper, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { fetchSingleFi } from "../../fetching/feature_importance";
 import { fetchPred } from "../../fetching/general";
 import SingleFeaturePlot from "../../plots/SingleFeaturePlot";
@@ -7,6 +7,7 @@ import { colors } from "../../utils/colors";
 import { parseAnchor } from "../../utils/parseAnchor";
 import HelpPopover from "./HelpPopover";
 import ShapPieChart from "../../plots/ShapPieChart";
+import { globalClickContext } from "../../App";
 
 export default function LocalExamination(props) {
   const {
@@ -19,6 +20,8 @@ export default function LocalExamination(props) {
     showFi,
     showMore,
   } = props;
+  
+  const {handleClickTracker} = useContext(globalClickContext)
 
   const currentAnchor = anchors.anchors[activeAnchor];
   const currentPred = anchors.preds[activeAnchor];
@@ -33,6 +36,12 @@ export default function LocalExamination(props) {
   const [shapOverview, setShapOverview] = useState(false);
   const [shapValues, setShapValues] = useState([]);
   const [variableShapValues, setVariableShapValues] = useState([]);
+
+
+  const toggleShapOverview = () => {
+    handleClickTracker("shap overview " + !shapOverview)
+    setShapOverview(!shapOverview)
+  }
 
   const calcSum = (num_list) => {
     return num_list.reduce(function (total, currentValue) {
@@ -96,10 +105,12 @@ export default function LocalExamination(props) {
 
   const updateVariableDp = (feature, newValue) => {
     setVariableDp({ ...variableDp, [feature]: newValue });
+    handleClickTracker("Slide " + feature + " to " + newValue)
   };
 
   const resetVariableDp = () => {
     setVariableDp(currentDp);
+    handleClickTracker("Reset")
   };
 
   const getValueRange = (feature) => {
@@ -188,7 +199,7 @@ export default function LocalExamination(props) {
         );
       }
       anchor_plots[featureIndex] = (
-        <Box sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ display: "flex", alignItems: "center" }} key={activeFeature}>
           {singleFeaturePlot}
           <Box>
             {showSlider && showFi && (
@@ -267,6 +278,7 @@ export default function LocalExamination(props) {
                 info={[
                   "Here you can see the prediction and date of the datapoint under examination",
                 ]}
+                id={"observing_dp_info"}
               />
               <Typography>
                 Observing Datapoint: <b>{dpPred}</b>
@@ -288,6 +300,7 @@ export default function LocalExamination(props) {
                   info={[
                     "Here you can see the prediction of the data point you have set with the slider and you can reset it to the initial datapoint.",
                   ]}
+                  id={"slider_info2"}
                 />
                 <Typography align="center">
                   <b>Slider</b>
@@ -321,6 +334,7 @@ export default function LocalExamination(props) {
                     "The precision provides information " +
                       "about the percentage of these datapoints that are classified with the same prediction as the datapoint under observation.",
                   ]}
+                  id={"anchors_info2"}
                 />
                 <Typography>
                   <b>Anchor</b>
@@ -360,15 +374,14 @@ export default function LocalExamination(props) {
                     "If the slider is activated, the upper FC value corresponds to the changed datapoint " +
                       "and the lower FC value corresponds to the data point under observation.",
                   ]}
+                  id={"relevance_info2"}
                 />
                 <Typography>
                   <b>Feature Contribution</b>
                 </Typography>
                 <Box sx={{ m: 2 }}>
                   <Button
-                    onClick={() => {
-                      setShapOverview(!shapOverview);
-                    }}
+                    onClick={toggleShapOverview}
                   >
                     Toggle overview
                   </Button>

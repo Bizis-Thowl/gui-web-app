@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Industrial XAI",
+  "name": "Explainable AI in the context of predictive maintenance",
   "icons": [
     {
       "src": "favicon.ico",

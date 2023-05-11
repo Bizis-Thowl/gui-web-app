@@ -11,8 +11,12 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { uploadFeedback } from "../../fetching";
 
 export default function FinishModal(props) {
+  
+  const user = localStorage.getItem("user")
+  
   const [open, setOpen] = useState(false);
   const [answer, setAnswer] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -26,6 +30,9 @@ export default function FinishModal(props) {
 
   const handleSubmission = () => {
     setSubmitted(true);
+    console.log(answer);
+    console.log(user);
+    uploadFeedback(answer, user)
   };
 
   return (

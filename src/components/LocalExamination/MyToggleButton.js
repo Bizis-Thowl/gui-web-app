@@ -1,14 +1,24 @@
 import { Visibility, VisibilityOff, LockRounded } from "@mui/icons-material";
 import { Box, Button, ToggleButton } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import InformationModal from "./InformationModal";
 import HelpPopover from "./HelpPopover";
+
+import { globalClickContext } from "../../App";
 
 export default function MyToggleButton(props) {
   const { toggle, selected, text, information, handleUnlocking, locked } =
     props;
 
+    
+  const {handleClickTracker} = useContext(globalClickContext)
+
   const [modalOpen, setModalOpen] = useState(false);
+
+  const handleToggling = () => {
+    toggle()
+    handleClickTracker("toggled " + text);
+  }
 
   const handleModalClose = () => {
     setModalOpen(false);
@@ -17,7 +27,7 @@ export default function MyToggleButton(props) {
   const handleModalUnlocking = () => {
     setModalOpen(false);
     handleUnlocking();
-    toggle();
+    handleClickTracker("unlocked " + text);
   };
 
   const handleModalOpen = () => {
@@ -27,11 +37,11 @@ export default function MyToggleButton(props) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       {!locked ? (
-        <VisibilityButton toggle={toggle} selected={selected} text={text} />
+        <VisibilityButton toggle={handleToggling} selected={selected} text={text} />
       ) : (
         <LockedButton text={text} handleOpen={handleModalOpen} />
       )}
-      <HelpPopover info={[information]} notAbsolute />
+      <HelpPopover info={[information]} notAbsolute id={text + "_info1"}/>
       <InformationModal
         componentText={text}
         info={information}

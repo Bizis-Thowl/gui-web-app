@@ -24,12 +24,22 @@ export default function ExaminationManagement(props) {
     unlockFi
   } = props;
 
-  console.log(lockedFi)
   const components = ["slider", "anchor", "relevance"];
+
+  let shuffledComponents;
+
+  if (localStorage.getItem("shuffledComponents")) {
+    shuffledComponents = JSON.parse(localStorage.getItem("shuffledComponents"))
+  } else {
+    shuffledComponents = shuffle(components);
+    console.log(shuffledComponents)
+    localStorage.setItem("shuffledComponents", JSON.stringify(shuffledComponents))
+  }
 
   const toggleButtonDict = {
     slider: (
       <MyToggleButton
+        key={"slider"}
         toggle={toggleSlider}
         selected={showSlider}
         text="Slider"
@@ -40,6 +50,7 @@ export default function ExaminationManagement(props) {
     ),
     anchor: (
       <MyToggleButton
+      key={"anchor"}
         toggle={toggleAnchor}
         selected={showAnchor}
         text="Anchor"
@@ -50,10 +61,11 @@ export default function ExaminationManagement(props) {
     ),
     relevance: (
       <MyToggleButton
+        key={"relevance"}
         toggle={toggleFi}
         selected={showFi}
         text="Relevance"
-        information="The Relevance component provides you with information on in which way and how much each feature value contributes to the prediction."
+        information="The Relevance component provides you with information in which way and how much each feature value contributes to the prediction."
         handleUnlocking={unlockFi}
         locked={lockedFi}
       />
@@ -74,10 +86,11 @@ export default function ExaminationManagement(props) {
         <HelpPopover
           info={["Click on a button below to augment the examination view"]}
           notAbsolute
+          id={"augmentations_info"}
         />
       </Box>
       <ToggleButtonGroup orientation="vertical" sx={{ mt: 2 }}>
-        {components.map(v => toggleButtonDict[v])}
+        {shuffledComponents.map(v => toggleButtonDict[v])}
         <MyToggleButton
           toggle={toggleMore}
           selected={showMore}
@@ -88,4 +101,15 @@ export default function ExaminationManagement(props) {
       <FinishModal />
     </Box>
   );
+}
+
+function shuffle(a) {
+  let j, x, i;
+  for (i = a.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = a[i];
+      a[i] = a[j];
+      a[j] = x;
+  }
+  return a;
 }

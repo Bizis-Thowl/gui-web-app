@@ -101,6 +101,7 @@ export default function SingleFeaturePlot(props) {
           showSlider && "Slider: Changing the feature with the slider will update the model prediction. The changed feature value is indicated by a red arrow",
           showAnchor && "Anchor: The anchor is indicated as the light blue area of the bar. If ALL feature values are inside the light blue area it is very likely to be part of the anchored class."
         ]}
+        id={"feature_info " + feature}
       />
       <Typography>{feature}</Typography>
       <Box

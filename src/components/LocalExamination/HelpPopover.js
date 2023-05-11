@@ -1,14 +1,20 @@
 import { HelpOutline } from "@mui/icons-material";
 import { Box, IconButton, Popover, Typography } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import { globalClickContext } from "../../App";
 
 export default function HelpPopover(props) {
 
-    const {info, notAbsolute} = props;
+  const {handleClickTracker} = useContext(globalClickContext)
+
+  const {info, notAbsolute, id: trackerId} = props;
   const [anchorEl, setAnchorEl] = useState(0);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    // console.log(clickMemo)
+    handleClickTracker(trackerId);
   };
 
   const handleClose = () => {

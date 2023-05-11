@@ -34,7 +34,7 @@ export default function ExaminationChoice(props) {
       const disabled = i !== 4;
 
       choices.push(
-        <Paper sx={{ m: 2, p: 2 }}>
+        <Paper sx={{ m: 2, p: 2 }} key={timestamps[i]}>
           <Paper sx={{ bgcolor: colors[preds[i]], mb: 1 }}>
             <Typography>{preds[i]}</Typography>
           </Paper>

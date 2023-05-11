@@ -21,6 +21,7 @@ export default function GeneralLinePlot(props) {
         for (const [key, value] of Object.entries(elems)) {
             plots.push(
                 <Plot
+                    key={key}
 
                     data={[{
                         
