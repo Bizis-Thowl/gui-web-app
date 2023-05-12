@@ -4,6 +4,7 @@ import MyToggleButton from "./MyToggleButton";
 import HelpPopover from "./HelpPopover";
 import FinishModal from "./FinishModal";
 import { ArrowBack } from "@mui/icons-material";
+import { uploadOrder } from "../../fetching";
 
 export default function ExaminationManagement(props) {
   const {
@@ -25,6 +26,7 @@ export default function ExaminationManagement(props) {
   } = props;
 
   const components = ["slider", "anchor", "relevance"];
+  const user = localStorage.getItem("user")
 
   let shuffledComponents;
 
@@ -32,7 +34,7 @@ export default function ExaminationManagement(props) {
     shuffledComponents = JSON.parse(localStorage.getItem("shuffledComponents"))
   } else {
     shuffledComponents = shuffle(components);
-    console.log(shuffledComponents)
+    uploadOrder(shuffledComponents, user)
     localStorage.setItem("shuffledComponents", JSON.stringify(shuffledComponents))
   }
 

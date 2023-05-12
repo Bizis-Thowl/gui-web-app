@@ -30,8 +30,6 @@ export default function FinishModal(props) {
 
   const handleSubmission = () => {
     setSubmitted(true);
-    console.log(answer);
-    console.log(user);
     uploadFeedback(answer, user)
   };
 
