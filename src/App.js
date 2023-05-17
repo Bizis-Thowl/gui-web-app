@@ -1,4 +1,4 @@
-import { Box, Paper, Typography, Tab, Tabs } from "@mui/material";
+import { Box, Paper, Typography, Tab, Tabs, Tooltip } from "@mui/material";
 import React, { useState, useEffect, createContext, useMemo } from "react";
 import "./App.css";
 import Behaviour from "./Behaviour";
@@ -221,8 +221,12 @@ function App() {
               aria-label="basic tabs example"
             >
               <Tab label="History" value={1} />
-              <Tab label="Feature Relevance" value={2} />
-              <Tab label="Model behaviour" value={3} />
+              <Tooltip title="Not yet available">
+                <span>
+                  <Tab label="Feature Relevance" value={2} disabled/>
+                </span>
+              </Tooltip>
+              <Tab label="Model behaviour" value={3}/>
               <Tab label="Scoring" value={4} />
               <Tab label="What-if?" value={5} />
             </Tabs>
