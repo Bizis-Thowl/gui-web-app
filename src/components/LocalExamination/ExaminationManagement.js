@@ -2,7 +2,6 @@ import { Box, Button, ToggleButtonGroup, Typography } from "@mui/material";
 import React, { useState } from "react";
 import MyToggleButton from "./MyToggleButton";
 import HelpPopover from "./HelpPopover";
-import FinishModal from "./FinishModal";
 import { ArrowBack } from "@mui/icons-material";
 import { uploadOrder } from "../../fetching";
 
@@ -100,7 +99,6 @@ export default function ExaminationManagement(props) {
           information="You can toggle this button to switch between seeing the three most relevant features or seeing all features"
         />
       </ToggleButtonGroup>
-      <FinishModal />
     </Box>
   );
 }

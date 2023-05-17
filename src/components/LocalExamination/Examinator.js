@@ -77,13 +77,6 @@ export default function Examinator(props) {
       sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Typography variant="h2">Examination View</Typography>
-      <Typography sx={{ fontWeight: 500, width: 900 }}>
-        Your Task: Figure out how trustworthy the current model prediction is.
-        If you have found reasons for your assessment, click the button on the
-        bottom right to hand-in the answer. Even if you still feel puzzled after
-        examining all available information hand-in your thoughts and
-        understanding. There is no wrong answer. Thank you :-)
-      </Typography>
       <Box sx={{ display: "flex" }}>
         <LocalExamination
           allDps={props.allDps}
