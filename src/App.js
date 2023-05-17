@@ -221,9 +221,9 @@ function App() {
               aria-label="basic tabs example"
             >
               <Tab label="History" value={1} />
-              <Tab label="Feature Relevance" value={2} disabled />
-              <Tab label="Model behaviour" value={3} disabled />
-              <Tab label="Scoring" value={4} disabled />
+              <Tab label="Feature Relevance" value={2} />
+              <Tab label="Model behaviour" value={3} />
+              <Tab label="Scoring" value={4} />
               <Tab label="What-if?" value={5} />
             </Tabs>
           </Paper>

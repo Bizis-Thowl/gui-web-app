@@ -31,7 +31,6 @@ export default function ExaminationChoice(props) {
     const preds = props.anchors.preds;
 
     for (let i = preds.length - 1; i >= 0; i--) {
-      const disabled = i !== 4;
 
       choices.push(
         <Paper sx={{ m: 2, p: 2 }} key={timestamps[i]}>
@@ -39,13 +38,9 @@ export default function ExaminationChoice(props) {
             <Typography>{preds[i]}</Typography>
           </Paper>
           <Typography>{timestamps[i]}</Typography>
-          <Tooltip title={disabled ? "This is locked for the evaluation" : ""}>
-            <span>
-              <Button disabled={disabled} onClick={() => handleDetailView(i)}>
-                <Visibility />
-              </Button>
-            </span>
-          </Tooltip>
+          <Button onClick={() => handleDetailView(i)}>
+            <Visibility />
+          </Button>
         </Paper>
       );
     }
