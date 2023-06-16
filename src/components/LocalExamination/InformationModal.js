@@ -24,6 +24,9 @@ export default function InformationModal(props) {
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      slotProps={{backdrop: {
+        bgcolor: "#ddd"
+      }}}
     >
       <Paper sx={style}>
         <Typography variant="h6" component="h2">

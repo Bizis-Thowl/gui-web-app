@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Button,
   Paper,
   ToggleButton,
   ToggleButtonGroup,
@@ -13,7 +12,6 @@ import { getRiskAverage } from "./utils/getHighestCount";
 import GeneralLinePlot from "./plots/GeneralLinePlot";
 import GaugeChart from "react-gauge-chart";
 import { label_assignment } from "./constants";
-import MySlider from "./MySlider";
 
 export default function History(props) {
   const [currentWin, setCurrentWin] = useState("features");
