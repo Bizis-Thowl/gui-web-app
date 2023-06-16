@@ -53,7 +53,7 @@ let theme = createTheme({
     MuiBackdrop: {
       styleOverrides: {
         root: {
-          backgroundColor: '#ddd',
+          backgroundColor: 'rgba(211, 211, 211, 0.1)',
         },
       },
     },
