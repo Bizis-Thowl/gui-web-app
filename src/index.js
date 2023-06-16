@@ -48,7 +48,16 @@ let theme = createTheme({
   },
   shape: {
     borderRadius: 10
-  }
+  },
+  components: {
+    MuiBackdrop: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#ddd',
+        },
+      },
+    },
+  },
 });
 
 theme = createTheme(theme, {
